@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { AscentAnimation } from "./AscentAnimation";
+import { BrandIntegration } from "./BrandIntegration";
 import { useModal } from "@/lib/ModalContext";
 
 export const Hero = () => {
@@ -76,12 +76,11 @@ export const Hero = () => {
           transition={{ duration: 1.2, delay: 0.8, ease: "easeOut" }}
           className="lg:col-span-4 hidden lg:block"
         >
-          <AscentAnimation />
+          <BrandIntegration />
         </motion.div>
       </div>
 
-      {/* Decorative Background Element */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-espresso/[0.02] -z-10" />
+      {/* Uniform Background - Decorative overlay removed to match left side */}
     </section>
   );
 };

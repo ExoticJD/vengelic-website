@@ -48,7 +48,7 @@ export const ContactForm = () => {
         type="submit"
         className="w-full py-5 bg-espresso text-linen text-sm uppercase tracking-[0.2em] hover:bg-espresso/90 transition-all duration-300 rounded-md shadow-2xl"
       >
-        Submit Enquiry
+        Submit Inquiry
       </button>
     </form>
   );

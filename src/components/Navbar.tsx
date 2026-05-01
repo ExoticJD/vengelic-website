@@ -32,20 +32,23 @@ export const Navbar = () => {
 
         {/* Web Links */}
         <div className="hidden md:flex items-center space-x-12">
-          {["Services", "Authority", "Contact"].map((item) => (
+          {[
+            { label: "Road Map", href: "#roadmap" },
+            { label: "Proof", href: "#proof" },
+          ].map((item) => (
             <Link
-              key={item}
-              href={`#${item.toLowerCase()}`}
+              key={item.label}
+              href={item.href}
               className="text-sm uppercase tracking-widest text-espresso/60 hover:text-espresso transition-colors duration-300"
             >
-              {item}
+              {item.label}
             </Link>
           ))}
           <button 
             onClick={openModal}
             className="px-6 py-2 border border-espresso text-sm uppercase tracking-widest hover:bg-espresso hover:text-linen transition-all duration-500 rounded-md"
           >
-            Enquire
+            Inquire
           </button>
         </div>
 
