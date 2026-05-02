@@ -27,7 +27,7 @@ export const ConsultationModal = () => {
             initial={{ scale: 0.95, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 20 }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] as any }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="relative w-full max-w-2xl bg-linen p-8 md:p-12 rounded-xl shadow-[0_32px_64px_-16px_rgba(67,38,22,0.3)] overflow-hidden"
           >
             {/* Close Button */}
