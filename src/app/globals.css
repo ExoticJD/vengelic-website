@@ -5,6 +5,7 @@
   --foreground: #432616;
   --linen: #F0E5D5;
   --espresso: #432616;
+  --gold: #D4AF37;
 }
 
 @theme inline {
@@ -12,8 +13,14 @@
   --color-foreground: var(--foreground);
   --color-linen: var(--linen);
   --color-espresso: var(--espresso);
+  --color-gold: var(--gold);
   --font-serif: var(--font-playfair);
   --font-sans: var(--font-inter);
+  
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
 }
 
 body {
@@ -31,4 +38,42 @@ body {
 
 * {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+  }
+  
+  .glow-hover {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .glow-hover:hover {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+    border-color: rgba(212, 175, 55, 0.5);
+  }
+
+  .glass-card {
+    background: rgba(240, 229, 213, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(67, 38, 22, 0.1);
+  }
+
+  .animate-fade-in {
+    animation: fade-in 1s ease-out forwards;
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }

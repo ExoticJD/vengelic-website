@@ -30,6 +30,7 @@ const LinkedInIcon = () => (
   </svg>
 );
 
+
 export const Footer = () => {
   return (
     <footer className="w-full bg-linen border-t border-espresso/10 py-16 px-6">
@@ -53,7 +54,7 @@ export const Footer = () => {
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-espresso/60 hover:text-espresso transition-colors duration-300"
+              className="text-espresso/60 hover:text-espresso transition-colors duration-300 block p-2"
             >
               <social.icon />
             </a>

@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { BrandIntegration } from "./BrandIntegration";
 import { useModal } from "@/lib/ModalContext";
+import { TextReveal } from "./animations/TextReveal";
 
 export const Hero = () => {
   const { openModal } = useModal();
@@ -38,33 +39,29 @@ export const Hero = () => {
           className="lg:col-span-6 space-y-10"
         >
           <motion.div variants={itemVariants} className="space-y-4">
-            <span className="text-xs uppercase tracking-[0.4em] text-espresso/40 block">
-              Authority-First SEO
-            </span>
-            <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl leading-[1.1] tracking-tight text-espresso">
-              The Art of <br />
-              <span className="italic">Invisibility</span> & Impact.
-            </h1>
+            <div className="font-serif text-5xl md:text-7xl lg:text-8xl leading-[1.1] tracking-tight text-espresso">
+              <TextReveal text="The Art of" className="inline-block" />
+              <br />
+              <span className="italic text-gold">
+                <TextReveal text="Search Dominance" className="inline-block" delay={0.4} />
+              </span>{" "}
+              <TextReveal text="& Impact." className="inline-block" delay={0.6} />
+            </div>
           </motion.div>
 
           <motion.p
             variants={itemVariants}
             className="max-w-xl text-lg md:text-xl text-espresso/60 leading-relaxed font-light"
           >
-            Vengelic crafts bespoke search strategies for brands that demand authority without the noise. 
-            We don't just rank; we command the narrative.
+            We help local businesses grow by making them the top choice on Google. No unnecessary complexity - just clear, proven strategies that get you more customers and more revenue.
           </motion.p>
 
           <motion.div variants={itemVariants} className="flex items-center space-x-8">
             <button 
               onClick={openModal}
-              className="px-10 py-4 bg-espresso text-linen text-sm uppercase tracking-widest hover:bg-espresso/90 transition-all duration-300 shadow-xl rounded-md"
+              className="px-10 py-4 bg-espresso text-linen text-sm uppercase tracking-widest hover:bg-espresso/90 transition-all duration-300 shadow-xl rounded-md glow-hover"
             >
               Secure Consultation
-            </button>
-            <button className="group flex items-center space-x-3 text-sm uppercase tracking-widest text-espresso hover:text-espresso/60 transition-colors">
-              <span>Our Methodology</span>
-              <span className="w-8 h-px bg-espresso group-hover:w-12 transition-all duration-300" />
             </button>
           </motion.div>
         </motion.div>

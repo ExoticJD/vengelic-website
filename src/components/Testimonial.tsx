@@ -42,15 +42,15 @@ export const Testimonial = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setIndex((prev) => (prev + 1) % testimonials.length);
-    }, 6000);
+    }, 12000);
     return () => clearInterval(timer);
   }, []);
 
   return (
     <section id="proof" className="py-40 px-6 bg-linen relative overflow-hidden">
-      <div className="max-w-5xl mx-auto text-center h-[400px] flex flex-col justify-center relative">
+      <div className="max-w-5xl mx-auto text-center min-h-[500px] md:min-h-[400px] flex flex-col justify-center relative">
         {/* Large Quote Mark - Static Background */}
-        <span className="absolute top-0 left-1/2 -translate-x-1/2 text-[200px] font-serif text-espresso/5 select-none pointer-events-none">
+        <span className="absolute top-0 left-1/2 -translate-x-1/2 text-[150px] md:text-[200px] font-serif text-espresso/5 select-none pointer-events-none">
           &ldquo;
         </span>
 
@@ -64,9 +64,9 @@ export const Testimonial = () => {
               duration: 0.8,
               ease: [0.16, 1, 0.3, 1] 
             }}
-            className="space-y-16 relative z-10"
+            className="space-y-12 md:space-y-16 relative z-10 py-12"
           >
-            <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl text-espresso leading-tight tracking-tight">
+            <h2 className="font-serif text-2xl md:text-5xl lg:text-6xl text-espresso leading-tight tracking-tight px-4">
               {testimonials[index].quote}
             </h2>
 

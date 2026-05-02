@@ -4,10 +4,10 @@ import React from "react";
 import { motion } from "framer-motion";
 
 const metrics = [
-  { label: "Average ROI", value: "140%", sub: "Year over Year" },
-  { label: "Organic Growth", value: "2.4M", sub: "Annual Impressions" },
-  { label: "Top 3 Rankings", value: "85%", sub: "Portfolio Average" },
-  { label: "Retention", value: "98%", sub: "Long-term Partners" },
+  { label: "Revenue ROI", value: "140%", sub: "Portfolio Growth" },
+  { label: "Market Reach", value: "2.4M", sub: "Annual Impressions" },
+  { label: "Search Dominance", value: "85%", sub: "Top 3 Rankings" },
+  { label: "Strategic Trust", value: "98%", sub: "Partner Retention" },
 ];
 
 export const ImpactMetrics = () => {

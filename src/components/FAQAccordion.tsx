@@ -6,16 +6,16 @@ import { Plus, Minus } from "lucide-react";
 
 const faqs = [
   {
-    question: "How does Vengelic handle SEO differently?",
-    answer: "We focus on authority and narrative control rather than just volume. Our strategies are bespoke, designed for high-end brands that need to maintain an editorial standards while dominating search.",
+    question: "How does Vengelic ensure a positive ROI?",
+    answer: "We focus on revenue-generating search intent rather than vanity metrics. By building unchallenged authority and targeting high-conversion keywords, we turn search traffic into measurable business growth.",
   },
   {
-    question: "What is 'Authority-First' search strategy?",
-    answer: "It means prioritizing placements and keywords that reinforce your brand's leadership in the industry. We build trust with search engines through high-quality, relevant associations.",
+    question: "How long before we dominate our market?",
+    answer: "While search authority is built over time, our strategic framework typically yields measurable shifts in search visibility and market capture within the first 90 days of partnership.",
   },
   {
-    question: "Do you provide white-glove reporting?",
-    answer: "Yes. Every partner receives bespoke monthly insights that focus on high-level impact, competitive landscape shifts, and strategic opportunities, delivered with absolute clarity.",
+    question: "Is Vengelic right for my business?",
+    answer: "We partner exclusively with established businesses ready to command their industry. If you prioritize long-term market authority and precision growth, our methodology is built for you.",
   },
 ];
 
