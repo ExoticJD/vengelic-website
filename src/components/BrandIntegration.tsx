@@ -142,53 +142,8 @@ export const BrandIntegration = () => {
           </svg>
         </motion.div>
 
-        {/* Pulsing Brand Container (VENGELIC + Logo) */}
-        <div className="absolute top-[280px] w-full flex flex-col items-center z-30 pointer-events-none">
-          {/* Fixed-size wrapper for perfectly stable pulsing */}
-          <motion.div
-            animate={{
-              scale: [1, 1.04, 1],
-              opacity: [0.8, 1, 0.8]
-            }}
-            transition={{
-              duration: 1.5,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            style={{
-              willChange: "transform",
-              transformOrigin: "center center"
-            }}
-            className="flex flex-col items-center justify-center w-[300px]"
-          >
-            <h2
-              className="font-serif text-3xl md:text-4xl text-espresso uppercase font-medium tracking-[0.4em] text-center"
-              style={{
-                paddingLeft: "0.4em", // Properly centers text with tracking
-                textShadow: "0px 10px 20px rgba(67, 38, 22, 0.1)"
-              }}
-            >
-              Vengelic
-            </h2>
-
-            {/* Vengelic Custom Logo with Spinning Inner Circles */}
-            <div className="mt-4 w-16 h-16 relative">
-              <svg viewBox="0 0 200 200" className="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ filter: "drop-shadow(0px 8px 12px rgba(67, 38, 22, 0.15))" }}>
-                <circle cx="100" cy="100" r="90" stroke="var(--espresso)" strokeWidth="4" />
-
-                {/* Rotating Inner Group - Explicitly centered on (100, 100) */}
-                <motion.g
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                  style={{ transformOrigin: "100px 100px" }}
-                >
-                  <circle cx="100" cy="70" r="25" stroke="var(--espresso)" strokeWidth="4" />
-                  <circle cx="70" cy="125" r="25" stroke="var(--espresso)" strokeWidth="4" />
-                  <circle cx="130" cy="125" r="25" stroke="var(--espresso)" strokeWidth="4" />
-                </motion.g>
-              </svg>
-            </div>
-          </motion.div>
+        <div className="absolute top-[320px] w-full flex flex-col items-center z-30 pointer-events-none">
+          {/* Logo removed and moved to navbar as requested */}
         </div>
 
         {/* Customers converging from all angles */}

@@ -61,7 +61,7 @@ export const Hero = () => {
               onClick={openModal}
               className="px-10 py-4 bg-espresso text-linen text-sm uppercase tracking-widest hover:bg-espresso/90 transition-all duration-300 shadow-xl rounded-md glow-hover"
             >
-              Secure Consultation
+              GET FREE CONSULTATION
             </button>
           </motion.div>
         </motion.div>

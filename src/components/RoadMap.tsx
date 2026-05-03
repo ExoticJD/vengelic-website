@@ -2,12 +2,13 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useMotionValue, useTransform, useSpring, AnimatePresence, useInView } from "framer-motion";
+import { useTheme } from "@/lib/ThemeContext";
 import { Search, Globe, Shield, Zap, MapPin, CheckCircle, Wifi, Battery, Signal, BatteryLow, BatteryMedium, BatteryFull } from "lucide-react";
 
 // Sub-component for the 3D Phone Mockup
 const PhoneMockup = () => {
   const containerRef = useRef(null);
-  const isInView = useInView(containerRef, { once: true, amount: 0.5 });
+  const isInView = useInView(containerRef, { once: false, amount: 0.5 });
   const mouseX = useMotionValue(0.5);
   const mouseY = useMotionValue(0.5);
   const [displayText, setDisplayText] = useState("");
@@ -108,7 +109,7 @@ const PhoneMockup = () => {
       onMouseLeave={handleMouseLeave}
     >
       <motion.div
-        style={{ rotateX, rotateY }}
+        style={{ rotateX, rotateY, filter: "brightness(0.92)" }}
         className="relative w-[320px] h-[640px] bg-black rounded-[3.5rem] p-[8px] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] border-[2px] border-white/10 overflow-hidden"
       >
         {/* Notch */}
@@ -230,41 +231,83 @@ const PhoneMockup = () => {
         {/* Home Indicator */}
         <div className="absolute bottom-3 left-1/2 -translate-x-1/2 w-28 h-1 bg-white/20 rounded-full" />
       </motion.div>
-
-      {/* Decorative Glow */}
-      <div className="absolute -top-10 -left-10 w-40 h-40 bg-gold/10 blur-[60px] rounded-full -z-10" />
-      <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-gold/10 blur-[60px] rounded-full -z-10" />
     </div>
   );
 };
 
-const FeatureCard = ({ icon: Icon, title, description, delay }: { icon: any, title: string, description: string, delay: number }) => (
-  <motion.div
-    initial={{ opacity: 0, x: 20 }}
-    whileInView={{ opacity: 1, x: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
-    className="glass-card p-8 rounded-2xl glow-hover relative overflow-hidden group"
-  >
-    <div className="relative z-10">
-      <div className="w-12 h-12 bg-espresso text-linen rounded-xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-500">
-        <Icon size={24} />
-      </div>
-      <h3 className="font-serif text-2xl text-espresso mb-4 tracking-tight">{title}</h3>
-      <p className="text-sm text-espresso/60 leading-relaxed font-light">
-        {description}
-      </p>
-    </div>
+const FeatureCard = ({ icon: Icon, title, description, delay, animationType }: { icon: any, title: string, description: string, delay: number, animationType?: "bounce" | "shimmer" | "rotate" }) => {
+  const iconVariants = {
+    bounce: {
+      y: [0, -10, 0],
+      transition: { 
+        repeat: Infinity, 
+        duration: 2, 
+        ease: "easeInOut" 
+      }
+    },
+    shimmer: {
+      scale: [1, 1.1, 1],
+      opacity: [1, 0.7, 1],
+      filter: ["drop-shadow(0 0 0px gold)", "drop-shadow(0 0 8px gold)", "drop-shadow(0 0 0px gold)"],
+      transition: { 
+        repeat: Infinity, 
+        duration: 2.5, 
+        ease: "easeInOut" 
+      }
+    },
+    rotate: {
+      rotateY: [0, 360],
+      transition: { 
+        repeat: Infinity, 
+        duration: 8, 
+        ease: "linear" 
+      }
+    }
+  };
 
-    {/* Subtle Background Glow */}
-    <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-gold/5 blur-[40px] rounded-full group-hover:bg-gold/10 transition-colors duration-700" />
-  </motion.div>
-);
+  const { theme } = useTheme();
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: 20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
+      className="glass-card p-8 rounded-2xl glow-hover relative overflow-hidden group"
+    >
+      <div className="relative z-10">
+        <div className="w-12 h-12 bg-espresso text-linen rounded-xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-500 overflow-hidden">
+          <motion.div
+            animate={animationType ? iconVariants[animationType] : {}}
+            className="flex items-center justify-center"
+          >
+            <Icon size={24} />
+          </motion.div>
+        </div>
+        <h3 className={`font-serif text-2xl mb-4 tracking-tight ${theme === 'dark' ? 'text-[#F0E5D5]' : 'text-espresso'}`}>
+          {title}
+        </h3>
+        <p className={`text-sm leading-relaxed font-light ${theme === 'dark' ? 'text-[#432616]' : 'text-espresso/60'}`}>
+          {description}
+        </p>
+      </div>
+
+      {/* Subtle Background Glow */}
+      <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-gold/5 blur-[40px] rounded-full group-hover:bg-gold/10 transition-colors duration-700" />
+    </motion.div>
+  );
+};
 
 export const RoadMap = () => {
   return (
-    <section id="roadmap" className="py-40 px-6 bg-linen relative overflow-hidden">
-      <div className="max-w-7xl mx-auto">
+    <section id="roadmap" className="py-32 px-6 bg-linen overflow-hidden">
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.98 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: false, margin: "-100px" }}
+        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-7xl mx-auto space-y-24"
+      >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
 
           {/* Left Side: Mockup */}
@@ -275,18 +318,10 @@ export const RoadMap = () => {
           {/* Right Side: Content & Features */}
           <div className="lg:col-span-7 order-1 lg:order-2 space-y-12">
             <div className="space-y-4">
-              <motion.span
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                className="text-xs uppercase tracking-[0.4em] text-espresso/40 block"
-              >
-                The Execution Framework
-              </motion.span>
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false }}
                 transition={{ duration: 1 }}
                 className="font-serif text-4xl md:text-6xl text-espresso tracking-tight leading-[1.1]"
               >
@@ -302,6 +337,7 @@ export const RoadMap = () => {
                   title="Complete Google Business Profile Optimization."
                   description="We rebuild your entire Google Business Profile from the ground up to match exactly what Google wants to see."
                   delay={0.2}
+                  animationType="bounce"
                 />
               </div>
               <FeatureCard 
@@ -309,24 +345,19 @@ export const RoadMap = () => {
                 title="Local Authority Building."
                 description="We establish your business as the dominant local authority through citations, content, and signals Google actually cares."
                 delay={0.4}
+                animationType="shimmer"
               />
               <FeatureCard 
                 icon={Globe}
                 title="Custom Website Design & Development."
-                description="We build your digital presence to turn website visitors into potential clients."
+                description="We build your digital presence to turn website visitors into potential clients, even if you don't already have one."
                 delay={0.6}
+                animationType="rotate"
               />
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Large Decorative Text (Background) */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-12 pointer-events-none select-none opacity-[0.02] -z-10">
-        <span className="font-serif text-[400px] text-espresso leading-none whitespace-nowrap">
-          VENGELIC AUTHORITY
-        </span>
-      </div>
+      </motion.div>
     </section>
   );
 };

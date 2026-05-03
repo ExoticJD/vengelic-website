@@ -40,6 +40,7 @@ export const metadata: Metadata = {
 };
 
 import { ModalProvider } from "@/lib/ModalContext";
+import { ThemeProvider } from "@/lib/ThemeContext";
 import { ConsultationModal } from "@/components/ConsultationModal";
 import { ScrollProgress } from "@/components/animations/ScrollProgress";
 
@@ -51,17 +52,20 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${inter.variable} h-full antialiased`}
+      className={`${playfair.variable} ${inter.variable} h-full antialiased transition-colors duration-700`}
     >
-      <body className="min-h-full flex flex-col font-inter bg-linen text-espresso">
+      <body className="min-h-full flex flex-col font-inter bg-linen text-espresso selection:bg-espresso selection:text-linen">
+        <div className="grain-overlay" />
         <ScrollProgress />
-        <ModalProvider>
-          <Navbar />
-          <main className="flex-grow">{children}</main>
-          <Footer />
-          <MobileCTA />
-          <ConsultationModal />
-        </ModalProvider>
+        <ThemeProvider>
+          <ModalProvider>
+            <Navbar />
+            <main className="flex-grow">{children}</main>
+            <Footer />
+            <MobileCTA />
+            <ConsultationModal />
+          </ModalProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

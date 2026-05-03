@@ -47,7 +47,7 @@ export const TextReveal: React.FC<TextRevealProps> = ({ text, className = "", de
       variants={container}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true }}
+      viewport={{ once: false }}
     >
       {words.map((word, index) => (
         <motion.span

@@ -1,5 +1,7 @@
+"use client";
+
 import React from "react";
-import Link from "next/link";
+import { useModal, ModalType } from "@/lib/ModalContext";
 
 const FacebookIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -32,6 +34,8 @@ const LinkedInIcon = () => (
 
 
 export const Footer = () => {
+  const { openModal } = useModal();
+
   return (
     <footer className="w-full bg-linen border-t border-espresso/10 py-16 px-6">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-8 md:space-y-0">
@@ -62,14 +66,17 @@ export const Footer = () => {
         </div>
 
         <div className="flex space-x-12">
-          {["Privacy", "Terms"].map((item) => (
-            <Link
-              key={item}
-              href={`#${item.toLowerCase()}`}
+          {[
+            { label: "Privacy", type: "privacy" },
+            { label: "Terms", type: "terms" },
+          ].map((item) => (
+            <button
+              key={item.label}
+              onClick={() => openModal(item.type as ModalType)}
               className="text-xs uppercase tracking-widest text-espresso/60 hover:text-espresso transition-colors duration-300"
             >
-              {item}
-            </Link>
+              {item.label}
+            </button>
           ))}
         </div>
       </div>

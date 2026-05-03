@@ -5,12 +5,15 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useModal } from "@/lib/ModalContext";
 import { useLocation } from "@/hooks/useLocation";
-import { MapPin } from "lucide-react";
+import { MapPin, Moon, Sun } from "lucide-react";
+import { useTheme } from "@/lib/ThemeContext";
+import { Logo } from "./Logo";
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const { openModal } = useModal();
   const { city, loading } = useLocation();
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,7 +31,8 @@ export const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <div className="flex flex-col">
-          <Link href="/" className="group">
+          <Link href="/" className="group flex items-center space-x-3">
+            <Logo className="w-8 h-8" />
             <h1 className="font-serif text-2xl tracking-tight text-espresso leading-none">
               VENGELIC<span className="opacity-0 group-hover:opacity-100 transition-opacity duration-500">.</span>
             </h1>
@@ -46,21 +50,43 @@ export const Navbar = () => {
           {[
             { label: "Road Map", href: "#roadmap" },
             { label: "Proof", href: "#proof" },
+            { label: "About", onClick: () => openModal("about") },
           ].map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              className="text-sm uppercase tracking-widest text-espresso/60 hover:text-espresso transition-colors duration-300"
-            >
-              {item.label}
-            </Link>
+            item.href ? (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="text-sm uppercase tracking-widest text-espresso/60 hover:text-espresso transition-colors duration-300"
+              >
+                {item.label}
+              </Link>
+            ) : (
+              <button
+                key={item.label}
+                onClick={item.onClick}
+                className="text-sm uppercase tracking-widest text-espresso/60 hover:text-espresso transition-colors duration-300"
+              >
+                {item.label}
+              </button>
+            )
           ))}
-          <button 
-            onClick={openModal}
-            className="px-6 py-2 border border-espresso text-sm uppercase tracking-widest hover:bg-espresso hover:text-linen transition-all duration-500 rounded-md glow-hover"
-          >
-            Inquire
-          </button>
+          
+          <div className="flex items-center space-x-6">
+            <button
+              onClick={toggleTheme}
+              className="text-espresso/60 hover:text-espresso transition-colors p-2 rounded-full hover:bg-espresso/5"
+              aria-label="Toggle Theme"
+            >
+              {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
+            </button>
+
+            <button 
+              onClick={openModal}
+              className="px-6 py-2 border border-espresso text-sm uppercase tracking-widest hover:bg-espresso hover:text-linen transition-all duration-500 rounded-md glow-hover"
+            >
+              Consultation
+            </button>
+          </div>
         </div>
 
         {/* Mobile Mini Menu (Placeholder) */}
