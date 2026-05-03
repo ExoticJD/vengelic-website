@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-import { motion, useMotionValue, useTransform, useSpring, AnimatePresence, useInView } from "framer-motion";
+import { motion, useMotionValue, useTransform, useSpring, AnimatePresence, useInView, Variants } from "framer-motion";
 import { useTheme } from "@/lib/ThemeContext";
 import { Search, Globe, Shield, Zap, MapPin, CheckCircle, Wifi, Battery, Signal, BatteryLow, BatteryMedium, BatteryFull } from "lucide-react";
 
@@ -236,7 +236,7 @@ const PhoneMockup = () => {
 };
 
 const FeatureCard = ({ icon: Icon, title, description, delay, animationType }: { icon: any, title: string, description: string, delay: number, animationType?: "bounce" | "shimmer" | "rotate" }) => {
-  const iconVariants = {
+  const iconVariants: Variants = {
     bounce: {
       y: [0, -10, 0],
       transition: { 
@@ -278,7 +278,8 @@ const FeatureCard = ({ icon: Icon, title, description, delay, animationType }: {
       <div className="relative z-10">
         <div className="w-12 h-12 bg-espresso text-linen rounded-xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-500 overflow-hidden">
           <motion.div
-            animate={animationType ? iconVariants[animationType] : {}}
+            variants={iconVariants}
+            animate={animationType}
             className="flex items-center justify-center"
           >
             <Icon size={24} />

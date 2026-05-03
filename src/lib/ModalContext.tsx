@@ -7,7 +7,7 @@ export type ModalType = "inquiry" | "about" | "privacy" | "terms";
 interface ModalContextType {
   isOpen: boolean;
   modalType: ModalType;
-  openModal: (type?: ModalType) => void;
+  openModal: (type?: ModalType | React.MouseEvent) => void;
   closeModal: () => void;
 }
 
