@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState } from "react";
 
-export type ModalType = "inquiry" | "about" | "privacy" | "terms";
+export type ModalType = "inquiry" | "about" | "privacy" | "terms" | "faq";
 
 interface ModalContextType {
   isOpen: boolean;

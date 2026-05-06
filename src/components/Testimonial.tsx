@@ -142,9 +142,6 @@ export const Testimonial = () => {
           <MarqueeRow items={row2} direction="right" speed={70} />
        </div>
 
-       {/* Background decorative elements */}
-       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(153,101,21,0.03)_0%,transparent_70%)] pointer-events-none" />
-       
        {/* Edge Fades for Seamless Look */}
        <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-linen to-transparent z-20 pointer-events-none" />
        <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-linen to-transparent z-20 pointer-events-none" />

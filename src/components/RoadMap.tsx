@@ -4,6 +4,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { motion, useMotionValue, useTransform, useSpring, AnimatePresence, useInView, Variants } from "framer-motion";
 import { useTheme } from "@/lib/ThemeContext";
 import { Search, Globe, Shield, Zap, MapPin, CheckCircle, Wifi, Battery, Signal, BatteryLow, BatteryMedium, BatteryFull } from "lucide-react";
+import { Logo } from "./Logo";
 
 // Sub-component for the 3D Phone Mockup
 const PhoneMockup = () => {
@@ -217,7 +218,9 @@ const PhoneMockup = () => {
                   className="block pt-6 border-t border-gray-100 hover:bg-blue-50/50 transition-colors rounded-xl p-2 -mx-2"
                 >
                   <div className="flex items-center space-x-2 mb-1">
-                    <div className="w-6 h-6 bg-espresso rounded-full flex items-center justify-center text-[10px] text-linen font-bold">V</div>
+                    <div className="w-6 h-6 bg-espresso rounded-full flex items-center justify-center p-1">
+                      <Logo className="w-full h-full" color="var(--linen)" />
+                    </div>
                     <div className="text-[10px] text-gray-500 italic">vengelic.com</div>
                   </div>
                   <h4 className="text-[#1a0dab] font-medium text-base mb-1 leading-tight hover:underline">Vengelic | Elite SEO Agency & Search Architects</h4>
@@ -239,28 +242,28 @@ const FeatureCard = ({ icon: Icon, title, description, delay, animationType }: {
   const iconVariants: Variants = {
     bounce: {
       y: [0, -10, 0],
-      transition: { 
-        repeat: Infinity, 
-        duration: 2, 
-        ease: "easeInOut" 
+      transition: {
+        repeat: Infinity,
+        duration: 2,
+        ease: "easeInOut"
       }
     },
     shimmer: {
       scale: [1, 1.1, 1],
       opacity: [1, 0.7, 1],
       filter: ["drop-shadow(0 0 0px gold)", "drop-shadow(0 0 8px gold)", "drop-shadow(0 0 0px gold)"],
-      transition: { 
-        repeat: Infinity, 
-        duration: 2.5, 
-        ease: "easeInOut" 
+      transition: {
+        repeat: Infinity,
+        duration: 2.5,
+        ease: "easeInOut"
       }
     },
     rotate: {
       rotateY: [0, 360],
-      transition: { 
-        repeat: Infinity, 
-        duration: 8, 
-        ease: "linear" 
+      transition: {
+        repeat: Infinity,
+        duration: 8,
+        ease: "linear"
       }
     }
   };
@@ -273,10 +276,16 @@ const FeatureCard = ({ icon: Icon, title, description, delay, animationType }: {
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
-      className="glass-card p-8 rounded-2xl glow-hover relative overflow-hidden group"
+      className={`p-8 rounded-2xl glow-hover relative overflow-hidden group border transition-all duration-500 ${
+        theme === 'dark' 
+          ? 'bg-linen border-espresso/10' 
+          : 'bg-espresso/[0.03] border-espresso/5'
+      }`}
     >
       <div className="relative z-10">
-        <div className="w-12 h-12 bg-espresso text-linen rounded-xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-500 overflow-hidden">
+        <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-500 overflow-hidden ${
+          theme === 'dark' ? 'bg-espresso text-linen' : 'bg-espresso text-linen'
+        }`}>
           <motion.div
             variants={iconVariants}
             animate={animationType}
@@ -285,10 +294,10 @@ const FeatureCard = ({ icon: Icon, title, description, delay, animationType }: {
             <Icon size={24} />
           </motion.div>
         </div>
-        <h3 className={`font-serif text-2xl mb-4 tracking-tight ${theme === 'dark' ? 'text-[#F0E5D5]' : 'text-espresso'}`}>
+        <h3 className={`font-serif text-2xl mb-4 tracking-tight ${theme === 'dark' ? 'text-espresso' : 'text-espresso'}`}>
           {title}
         </h3>
-        <p className={`text-sm leading-relaxed font-light ${theme === 'dark' ? 'text-[#432616]' : 'text-espresso/60'}`}>
+        <p className={`text-sm leading-relaxed font-light ${theme === 'dark' ? 'text-espresso/70' : 'text-espresso/80'}`}>
           {description}
         </p>
       </div>
@@ -302,7 +311,7 @@ const FeatureCard = ({ icon: Icon, title, description, delay, animationType }: {
 export const RoadMap = () => {
   return (
     <section id="roadmap" className="py-32 px-6 bg-linen overflow-hidden">
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, scale: 0.98 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: false, margin: "-100px" }}
@@ -333,7 +342,7 @@ export const RoadMap = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="md:col-span-2">
-                <FeatureCard 
+                <FeatureCard
                   icon={MapPin}
                   title="Complete Google Business Profile Optimization."
                   description="We rebuild your entire Google Business Profile from the ground up to match exactly what Google wants to see."
@@ -341,14 +350,14 @@ export const RoadMap = () => {
                   animationType="bounce"
                 />
               </div>
-              <FeatureCard 
+              <FeatureCard
                 icon={Shield}
                 title="Local Authority Building."
                 description="We establish your business as the dominant local authority through citations, content, and signals Google actually cares."
                 delay={0.4}
                 animationType="shimmer"
               />
-              <FeatureCard 
+              <FeatureCard
                 icon={Globe}
                 title="Custom Website Design & Development."
                 description="We build your digital presence to turn website visitors into potential clients, even if you don't already have one."

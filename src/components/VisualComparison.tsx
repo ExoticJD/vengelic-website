@@ -13,17 +13,17 @@ const comparisons = [
   {
     traditional: "Competing for Rankings",
     vengelic: "Unchallenged Authority",
-    highlight: false
+    highlight: true
   },
   {
     traditional: "12-18 Months (Estimated)",
     vengelic: "90 Day Guarantee",
-    highlight: false
+    highlight: true
   },
   {
     traditional: "Temporary Visibility",
     vengelic: "Permanent Ranking",
-    highlight: false
+    highlight: true
   },
   {
     traditional: "Monthly Data Dumps",
@@ -44,44 +44,62 @@ export const VisualComparison = () => {
       >
         <div className="text-center space-y-4">
           <h2 className="font-serif text-4xl md:text-5xl text-espresso tracking-tight">
-            <span className="italic text-gold">Vengelic</span> <span className="inline-block ml-8 mr-4">vs</span> Traditional
+            The <span className="italic text-gold">Vengelic</span> Difference
           </h2>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full border-collapse">
-            <thead>
-              <tr className="border-b border-espresso/10">
-                <th className="py-8 px-6 text-center text-xs uppercase tracking-widest text-gold font-bold bg-espresso/5 rounded-t-2xl">The Vengelic Standard</th>
-                <th className="py-8 px-6 text-center text-xs uppercase tracking-widest text-espresso/40 font-medium">Traditional SEO</th>
-              </tr>
-            </thead>
-            <tbody>
-              {comparisons.map((row, idx) => (
-                <motion.tr 
-                  key={idx}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: false }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="group"
-                >
-                  <td className={`py-8 px-6 border-b border-espresso/5 text-center font-medium ${row.highlight ? 'text-espresso' : 'text-espresso/80'} bg-espresso/5`}>
-                    <div className="flex flex-col items-center space-y-2">
-                      <Check size={16} className="text-gold" />
-                      <span>{row.vengelic}</span>
-                    </div>
-                  </td>
-                  <td className="py-8 px-6 border-b border-espresso/5 text-center text-espresso/40 font-light">
-                    <div className="flex flex-col items-center space-y-2">
-                      <X size={16} className="opacity-20" />
-                      <span>{row.traditional}</span>
-                    </div>
-                  </td>
-                </motion.tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="relative">
+          {/* Header Row */}
+          <div className="grid grid-cols-[1fr_auto_1fr] gap-8 md:gap-16 items-center mb-12 border-b border-espresso/10 pb-8 px-4">
+            <div className="text-center">
+              <span className="text-xs uppercase tracking-[0.3em] text-gold font-black">Vengelic</span>
+            </div>
+            <div className="w-12 text-center">
+              <span className="text-xs uppercase tracking-widest text-gold font-black">VS</span>
+            </div>
+            <div className="text-center">
+              <span className="text-xs uppercase tracking-[0.3em] text-espresso/40 font-bold">Others</span>
+            </div>
+          </div>
+
+          {/* Comparison Rows */}
+          <div className="space-y-4">
+            {comparisons.map((row, idx) => (
+              <motion.div 
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false }}
+                transition={{ delay: idx * 0.1 }}
+                className="grid grid-cols-[1fr_auto_1fr] gap-8 md:gap-16 items-center p-6 md:p-8 rounded-2xl transition-all duration-500 hover:bg-espresso/[0.02]"
+              >
+                {/* Vengelic Side */}
+                <div className="text-center space-y-3">
+                  <div className="flex justify-center">
+                    <Check size={18} className="text-gold" />
+                  </div>
+                  <p className={`text-sm md:text-base font-serif tracking-tight text-espresso ${row.highlight ? 'font-bold' : ''}`}>
+                    {row.vengelic}
+                  </p>
+                </div>
+
+                {/* Divider Dot */}
+                <div className="w-12 flex justify-center">
+                  <div className="w-2 h-2 rounded-full bg-gold/60" />
+                </div>
+
+                {/* Others Side */}
+                <div className="text-center space-y-3">
+                  <div className="flex justify-center">
+                    <X size={16} className="text-espresso/40" />
+                  </div>
+                  <p className="text-sm md:text-base text-espresso font-light italic">
+                    {row.traditional}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </motion.div>
 

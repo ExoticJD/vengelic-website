@@ -2,8 +2,8 @@ import { Hero } from "@/components/Hero";
 import { RoadMap } from "@/components/RoadMap";
 import { Testimonial } from "@/components/Testimonial";
 import { VisualComparison } from "@/components/VisualComparison";
-import { FAQAccordion } from "@/components/FAQAccordion";
 import { MarketCalculator } from "@/components/MarketCalculator";
+import { FinalCTA } from "@/components/FinalCTA";
 
 export default function Home() {
   return (
@@ -13,7 +13,7 @@ export default function Home() {
       <MarketCalculator />
       <VisualComparison />
       <Testimonial />
-      <FAQAccordion />
+      <FinalCTA />
     </div>
   );
 }

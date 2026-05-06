@@ -43,6 +43,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Global Pointer Cursor for Clickable Elements */
+button, 
+a, 
+[role="button"],
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+.cursor-pointer-all {
+  cursor: pointer !important;
+}
+
 ::selection {
   background-color: var(--espresso);
   color: var(--linen);

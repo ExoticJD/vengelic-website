@@ -6,15 +6,18 @@ import { BarChart3, TrendingUp, Target, ChevronRight, RefreshCcw, Sparkles } fro
 import { useModal } from "@/lib/ModalContext";
 
 const industries = [
+  { id: "service", name: "Service Business", multiplier: 1.7 },
   { id: "legal", name: "Legal & Professional", multiplier: 1.8 },
   { id: "medical", name: "Medical & Health", multiplier: 1.5 },
-  { id: "realestate", name: "Real Estate & Estates", multiplier: 1.6 },
+  { id: "realestate", name: "Real Estate", multiplier: 1.6 },
   { id: "luxury", name: "Luxury Goods & Retail", multiplier: 2.1 },
+  { id: "other", name: "Other", multiplier: 1.5 },
 ];
 
 export const MarketCalculator = () => {
   const [step, setStep] = useState(1);
   const [selectedIndustry, setSelectedIndustry] = useState(industries[0]);
+  const [otherIndustry, setOtherIndustry] = useState("");
   const [currentRevenue, setCurrentRevenue] = useState(50000);
   const [isCalculating, setIsCalculating] = useState(false);
   const { openModal } = useModal();
@@ -75,6 +78,23 @@ export const MarketCalculator = () => {
                     </button>
                   ))}
                 </div>
+
+                {selectedIndustry.id === "other" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="space-y-2"
+                  >
+                    <label className="text-[10px] uppercase tracking-widest text-espresso/40 font-bold px-1">Please specify your industry</label>
+                    <input
+                      type="text"
+                      value={otherIndustry}
+                      onChange={(e) => setOtherIndustry(e.target.value)}
+                      placeholder="e.g. Manufacturing, Education..."
+                      className="w-full p-4 bg-white/50 border border-espresso/10 rounded-xl focus:outline-none focus:border-gold/50 text-espresso"
+                    />
+                  </motion.div>
+                )}
                 <button
                   onClick={() => setStep(2)}
                   className="w-full py-4 bg-espresso text-linen rounded-xl flex items-center justify-center space-x-2 hover:bg-espresso/90 transition-all uppercase tracking-widest text-sm font-bold"
@@ -159,21 +179,6 @@ export const MarketCalculator = () => {
                     Your Unclaimed Potential: <br />
                     <span className="text-gold italic">${potentialGrowth.toLocaleString()} / mo</span>
                   </h3>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-                  <div className="p-6 bg-espresso rounded-2xl border border-espresso/5 shadow-inner">
-                    <p className="text-[10px] uppercase tracking-widest text-linen/60 mb-2 font-bold">Authority Gap</p>
-                    <p className="font-serif text-2xl text-linen">High</p>
-                  </div>
-                  <div className="p-6 bg-espresso rounded-2xl border border-espresso/5 shadow-inner">
-                    <p className="text-[10px] uppercase tracking-widest text-linen/60 mb-2 font-bold">Market Capture</p>
-                    <p className="font-serif text-2xl text-linen">12%</p>
-                  </div>
-                  <div className="p-6 bg-espresso rounded-2xl border border-espresso/5 shadow-inner">
-                    <p className="text-[10px] uppercase tracking-widest text-linen/60 mb-2 font-bold">Growth Vector</p>
-                    <p className="font-serif text-2xl text-linen">Aggressive</p>
-                  </div>
                 </div>
 
                 <div className="pt-8 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">

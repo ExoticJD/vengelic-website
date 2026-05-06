@@ -38,15 +38,17 @@ export const Footer = () => {
 
   return (
     <footer className="w-full bg-linen border-t border-espresso/10 py-16 px-6">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-8 md:space-y-0">
-        <div className="flex flex-col items-center md:items-start space-y-4">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12 md:gap-24">
+        {/* Left: Branding */}
+        <div className="flex flex-col items-center md:items-start space-y-3">
           <h2 className="font-serif text-xl text-espresso tracking-tight">VENGELIC</h2>
-          <p className="text-xs uppercase tracking-[0.2em] text-espresso/40">
+          <p className="text-[10px] uppercase tracking-[0.2em] text-espresso/40">
             © 2024 Vengelic Authority. All Rights Reserved.
           </p>
         </div>
 
-        <div className="flex space-x-8">
+        {/* Center: Socials */}
+        <div className="flex items-center space-x-6">
           {[
             { icon: FacebookIcon, href: "https://www.facebook.com/profile.php?id=61564498508022" },
             { icon: InstagramIcon, href: "https://www.instagram.com/vengelic.official/" },
@@ -58,22 +60,25 @@ export const Footer = () => {
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-espresso/60 hover:text-espresso transition-colors duration-300 block p-2"
+              className="text-espresso/40 hover:text-espresso transition-all duration-300 transform hover:scale-110"
             >
               <social.icon />
             </a>
           ))}
         </div>
 
-        <div className="flex space-x-12">
+        {/* Right: Links */}
+        <div className="flex items-center space-x-10">
           {[
+            { label: "About", type: "about" },
+            { label: "FAQ", type: "faq" },
             { label: "Privacy", type: "privacy" },
             { label: "Terms", type: "terms" },
           ].map((item) => (
             <button
               key={item.label}
               onClick={() => openModal(item.type as ModalType)}
-              className="text-xs uppercase tracking-widest text-espresso/60 hover:text-espresso transition-colors duration-300"
+              className="text-xs uppercase tracking-[0.2em] text-espresso/40 hover:text-gold transition-colors duration-300 font-bold"
             >
               {item.label}
             </button>
