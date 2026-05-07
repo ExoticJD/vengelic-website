@@ -3,21 +3,38 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Loader2 } from "lucide-react";
+import { submitContactForm } from "@/app/actions/contact";
 
 export const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [website, setWebsite] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    website: "",
+    message: ""
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError(null);
     
-    // Simulate processing
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+    try {
+      const result = await submitContactForm(formData);
+      
+      if (result.success) {
+        setIsSubmitted(true);
+      } else {
+        setError(result.error || "Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      setError("A connection error occurred. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (isSubmitted) {
@@ -40,12 +57,19 @@ export const ContactForm = () => {
 
   return (
     <form className="space-y-8" onSubmit={handleSubmit}>
+      {error && (
+        <div className="p-4 bg-red-50 text-red-600 text-sm rounded-md border border-red-100">
+          {error}
+        </div>
+      )}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-2">
           <label className="text-xs uppercase tracking-widest text-espresso/60 block px-1">Name *</label>
           <input
             required
             type="text"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             className="w-full bg-transparent border-b border-espresso/20 py-3 px-1 focus:border-espresso outline-none transition-colors text-espresso"
             placeholder="Evelyn Harper"
           />
@@ -55,6 +79,8 @@ export const ContactForm = () => {
           <input
             required
             type="email"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             className="w-full bg-transparent border-b border-espresso/20 py-3 px-1 focus:border-espresso outline-none transition-colors text-espresso"
             placeholder="evelyn@aether.com"
           />
@@ -65,8 +91,8 @@ export const ContactForm = () => {
         <label className="text-xs uppercase tracking-widest text-espresso/60 block px-1">Website</label>
         <input
           type="text"
-          value={website}
-          onChange={(e) => setWebsite(e.target.value)}
+          value={formData.website}
+          onChange={(e) => setFormData({ ...formData, website: e.target.value })}
           className="w-full bg-transparent border-b border-espresso/20 py-3 px-1 focus:border-espresso outline-none transition-colors text-espresso"
           placeholder="vengelic.com"
         />
@@ -76,6 +102,8 @@ export const ContactForm = () => {
         <label className="text-xs uppercase tracking-widest text-espresso/60 block px-1">Message</label>
         <textarea
           rows={4}
+          value={formData.message}
+          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
           className="w-full bg-transparent border-b border-espresso/20 py-3 px-1 focus:border-espresso outline-none transition-colors text-espresso resize-none"
           placeholder="Tell us about your brand's vision..."
         />

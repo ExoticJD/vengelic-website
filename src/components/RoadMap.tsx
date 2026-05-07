@@ -326,7 +326,7 @@ export const RoadMap = () => {
           </div>
 
           {/* Right Side: Content & Features */}
-          <div className="lg:col-span-7 order-1 lg:order-2 space-y-12">
+          <div className="lg:col-span-7 order-1 lg:order-2 space-y-12 text-center lg:text-left">
             <div className="space-y-4">
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}

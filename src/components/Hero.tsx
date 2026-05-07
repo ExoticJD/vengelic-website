@@ -46,7 +46,7 @@ export const Hero = () => {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="lg:col-span-6 space-y-10"
+          className="lg:col-span-6 space-y-10 text-center lg:text-left"
         >
           <motion.div variants={itemVariants} className="space-y-4">
             <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl leading-[1.1] tracking-tight text-espresso">
@@ -67,12 +67,12 @@ export const Hero = () => {
 
           <motion.p
             variants={itemVariants}
-            className="max-w-xl text-lg md:text-xl text-espresso/60 leading-relaxed font-light"
+            className="max-w-xl text-lg md:text-xl text-espresso/60 leading-relaxed font-light mx-auto lg:mx-0"
           >
             We help local businesses grow by making them the top choice on Google. No unnecessary complexity - just clear, proven strategies that get you more customers and more revenue.
           </motion.p>
 
-          <motion.div variants={itemVariants} className="flex items-center space-x-8">
+          <motion.div variants={itemVariants} className="flex items-center justify-center lg:justify-start space-x-8">
             <button
               onClick={openModal}
               className="px-10 py-4 bg-espresso text-linen text-sm uppercase tracking-widest hover:bg-linen hover:text-espresso border border-espresso transition-all duration-500 shadow-xl rounded-md glow-hover"
